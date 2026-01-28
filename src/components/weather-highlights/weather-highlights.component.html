@@ -1,0 +1,53 @@
+@if(currentWeather(); as current) {
+<div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg h-full">
+  <h3 class="text-xl font-bold mb-4">Today's Highlights</h3>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+    
+    <!-- UV Index -->
+    <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+      <h4 class="text-blue-200 mb-2">UV Index</h4>
+      <p class="text-4xl font-bold">{{ current.uvIndex }}</p>
+      <p class="font-semibold">{{ getUvIndexCategory(current.uvIndex) }}</p>
+      <div class="w-full bg-gray-600 rounded-full h-2.5 mt-2">
+        <div class="bg-yellow-400 h-2.5 rounded-full" [style.width.%]="(current.uvIndex / 11) * 100"></div>
+      </div>
+    </div>
+
+    <!-- Wind Status -->
+    <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+      <h4 class="text-blue-200 mb-2">Wind Status</h4>
+      <p class="text-4xl font-bold">{{ current.windSpeed }} <span class="text-2xl">km/h</span></p>
+      <div class="flex items-center gap-2 mt-2">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-blue-300">
+            <path d="M12.378 1.602a.75.75 0 00-.756 0L3 7.232V18a.75.75 0 00.75.75h16.5A.75.75 0 0021 18V7.232l-8.622-5.63zM12 7.5a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V8.25a.75.75 0 01.75-.75zM13.5 12a1.5 1.5 0 100 3 1.5 1.5 0 000-3z" />
+         </svg>
+        <span class="font-semibold">{{ current.windDirection }}</span>
+      </div>
+    </div>
+    
+    <!-- Sunrise & Sunset -->
+    <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+      <h4 class="text-blue-200 mb-2">Sunrise & Sunset</h4>
+      <div class="flex items-center gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-yellow-300"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06-4.505 4.505 0 00-1.06 1.06.75.75 0 01-1.06-1.061 6.004 6.004 0 011.414-1.414.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5h2.25a.75.75 0 01.75.75zM17.834 17.834a.75.75 0 01-1.06 0 4.505 4.505 0 00-1.06-1.06.75.75 0 111.06-1.06 6.004 6.004 0 011.414 1.414.75.75 0 010 1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0v2.25a.75.75 0 01-.75.75zM5.106 18.894a.75.75 0 010-1.06 4.505 4.505 0 001.06-1.06.75.75 0 111.06 1.06 6.004 6.004 0 01-1.414 1.414.75.75 0 01-1.06 0zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.166 6.166a.75.75 0 011.06 0 4.505 4.505 0 001.06 1.06.75.75 0 11-1.06 1.06A6.004 6.004 0 015.106 6.106a.75.75 0 010-1.06z" /></svg>
+        <p class="text-2xl font-bold">{{ current.sunrise }}</p>
+      </div>
+       <div class="flex items-center gap-4 mt-2">
+         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10 text-orange-400"><path fill-rule="evenodd" d="M12.54 1.43a.75.75 0 01.92 0l6.25 4.25a.75.75 0 01-.42 1.32l-2.09-.7v6.95a.75.75 0 01-1.5 0V8.25l-2.25 1.5v6.5a.75.75 0 01-1.5 0v-6.5L10 8.25v6.95a.75.75 0 01-1.5 0V7.55l-2.09.7a.75.75 0 01-.42-1.32l6.25-4.25z" clip-rule="evenodd" /><path d="M4.5 19.5a.75.75 0 000 1.5h15a.75.75 0 000-1.5h-15z" /></svg>
+        <p class="text-2xl font-bold">{{ current.sunset }}</p>
+      </div>
+    </div>
+
+    <!-- Air Quality -->
+    <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+       <h4 class="text-blue-200 mb-2">Air Quality</h4>
+       <div class="flex items-center gap-4">
+        <p class="text-4xl font-bold">{{ current.airQualityIndex }}</p>
+        <span [class]="'px-3 py-1 text-sm font-semibold rounded-full text-white ' + getAirQualityColor(current.airQualityIndex)">{{ current.airQualityCategory }}</span>
+       </div>
+       <p class="mt-2 text-sm">Air quality is considered satisfactory, and air pollution poses little or no risk.</p>
+    </div>
+
+  </div>
+</div>
+}

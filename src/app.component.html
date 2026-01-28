@@ -1,0 +1,38 @@
+<main class="min-h-screen w-full bg-gradient-to-br from-gray-900 via-blue-900 to-gray-800 text-white p-4 sm:p-6 lg:p-8">
+  <div class="max-w-7xl mx-auto">
+    <header class="mb-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold tracking-tight">Weather Monitor</h1>
+      <p class="text-blue-200 mt-2">Your personal weather dashboard</p>
+    </header>
+    
+    <app-search (citySearch)="onSearch($event)"></app-search>
+
+    <div class="mt-8 min-h-[500px]">
+      @if (isLoading()) {
+        <div class="flex justify-center items-center h-full pt-16">
+          <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-blue-400"></div>
+        </div>
+      } @else if (error()) {
+        <div class="bg-red-500/20 border border-red-500 text-red-300 px-4 py-3 rounded-lg text-center">
+          <strong class="font-bold">Error:</strong>
+          <span class="block sm:inline ml-2">{{ error() }}</span>
+        </div>
+      } @else if (weatherData(); as data) {
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div class="lg:col-span-2 space-y-8">
+            <app-current-weather [currentWeather]="data.current"></app-current-weather>
+            <app-hourly-forecast [hourlyForecast]="data.hourly"></app-hourly-forecast>
+            <app-forecast [forecast]="data.forecast"></app-forecast>
+          </div>
+          <div class="lg:col-span-1">
+            <app-weather-highlights [currentWeather]="data.current"></app-weather-highlights>
+          </div>
+        </div>
+      } @else {
+        <div class="text-center text-gray-400 py-16">
+          <p>Search for a city to get started.</p>
+        </div>
+      }
+    </div>
+  </div>
+</main>

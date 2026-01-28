@@ -1,0 +1,5 @@
+{
+  "name": "Modern Weather Monitor",
+  "description": "A sleek and modern weather application providing real-time weather updates, forecasts, and detailed atmospheric conditions for any city.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,38 @@
+@if (currentWeather(); as current) {
+  <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 shadow-lg">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+      <!-- Left side: Temp, City, Condition -->
+      <div class="flex items-center gap-6 text-center sm:text-left">
+        <div class="w-28 h-28 md:w-36 md:h-36 flex-shrink-0">
+          <app-weather-icon [condition]="current.condition" className="w-full h-full text-yellow-300"></app-weather-icon>
+        </div>
+        <div>
+          <h2 class="text-4xl font-bold tracking-wide">{{ current.city }}</h2>
+          <p class="text-7xl font-extrabold my-1">{{ current.temperature }}&deg;C</p>
+          <p class="text-blue-200 text-lg">Feels like {{ current.feelsLike }}&deg;C</p>
+          <p class="text-lg font-semibold mt-1">{{ current.condition }}</p>
+        </div>
+      </div>
+      
+      <!-- Right side: Details -->
+      <div class="grid grid-cols-2 gap-x-8 gap-y-4 text-lg w-full sm:w-auto mt-6 sm:mt-0 text-center sm:text-left">
+        <div class="flex flex-col">
+          <span class="text-blue-200">Humidity</span>
+          <span class="font-bold text-xl">{{ current.humidity }}%</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-blue-200">Wind Speed</span>
+          <span class="font-bold text-xl">{{ current.windSpeed }} km/h</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-blue-200">Pressure</span>
+          <span class="font-bold text-xl">{{ current.pressure }} hPa</span>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-blue-200">Visibility</span>
+          <span class="font-bold text-xl">{{ current.visibility }} km</span>
+        </div>
+      </div>
+    </div>
+  </div>
+}
